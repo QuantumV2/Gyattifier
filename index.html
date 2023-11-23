@@ -17,35 +17,35 @@
       return cleanedWord
     }
     function isDeterminer(word) {
-      return nlp(word).match('#Determiner').found;
+      return nlp(word).match('#Determiner').out('array').length != 0;
     }
     function isPronoun(word) {
-      return nlp(word).match('#Pronoun').found;
+      return nlp(word).match('#Pronoun').out('array').length != 0;
     }
     function isNoun(word) {
       const doc = nlp(word);
       var ignore = false
       if (isDeterminer(doc) || isPronoun(doc)) {ignore = true;}
-      if (ignore === false) {return doc.nouns().out('array').length != 0 && doc.verbs().out('array').length <= 0;}
+      if (ignore === false) {return doc.match('#Noun').out('array').length != 0 && doc.match('#Verb').out('array').length <= 0;}
       else {return false;}
     }
     function isVerb(word) {
       const doc = nlp(word);
       var ignore = false
       if (isDeterminer(doc) || isPronoun(doc)) {ignore = true;}
-      if (ignore === false) {return doc.verbs().out('array').length != 0 && doc.nouns().out('array').length <= 0;}
+      if (ignore === false) {return doc.match('#Verb').out('array').length != 0 && doc.match('#Noun').out('array').length <= 0; }
       else {return false;}
     }
     function replaceWords() {
 
 
       var nouns_rizz = ["ohio", "kai cenat", "sigma", "gyatt", "drip", "baby gronk", "fanum tax", "skibidi toilet", "💀", "grimace shake", "ice spice", "canny", "kino", "uncanny", "bluey", "pibby", "jumbo josh", "rainbow friend", "rizz", "smurf cat", "bro", "mr beast", "noot noot", "cg5", "huggy wuggy", "seek", "scary blue", "zumbl sauce", "fnf", "among us", "dream", "soyjak", "garten of banban", "pizza tower", "monday left me broken cat", "beluga", "roblox", "the ocky way", "whopper", "blud"];
-      var verbs_rizz = ["rizz", "sus", "unalive", "hit the griddy", "let him cook"];
+      var verbs_rizz = ["rizz", "sus", "hit the griddy"];
       var replacedSentence = document.getElementById("textInput").value.split(" ").map(function (word) {
         if (isNoun(cleanWord(word)) && Math.floor(Math.random() * 3) === 2 && word.toLowerCase() != "you" && word.toLowerCase() != "you're" && word.toLowerCase() != "your" && word.toLowerCase() != "the" &&
 word.toLowerCase() != "i") {
           return nouns_rizz[Math.floor(Math.random() * nouns_rizz.length)];
-        } else if (isVerb(cleanWord(word)) && Math.floor(Math.random() * 5) === 3 && word.toLowerCase() != "is") {
+        } else if (isVerb(cleanWord(word)) && Math.floor(Math.random() * 6) === 3 && word.toLowerCase() != "is" && word.toLowerCase() != "may") {
           return verbs_rizz[Math.floor(Math.random() * verbs_rizz.length)];
         } else {
           return word;
@@ -53,18 +53,6 @@ word.toLowerCase() != "i") {
       }).join(" ");
       document.getElementById("output").textContent = replacedSentence;
 
-      /*var replacedSentence = document.getElementById("textInput").value.split(" ").map(function (word) {
-      if (nouns.includes(word)) {
-      return nouns_rizz[Math.floor(Math.random() * nouns_rizz.length)];
-      } else if (verbs.includes(word)) {
-      return verbs_rizz[Math.floor(Math.random() * verbs_rizz.length)];
-      }
-      else {
-      return word;
-      }
-      }).join(" ");
-      document.getElementById("output").textContent = replacedSentence;
-      }*/
     }
   </script>
 </body>
