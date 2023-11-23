@@ -42,10 +42,10 @@
       var nouns_rizz = ["ohio", "kai cenat", "sigma", "gyatt", "drip", "baby gronk", "fanum tax", "skibidi toilet", "💀", "grimace shake", "ice spice", "canny", "kino", "uncanny", "bluey", "pibby", "jumbo josh", "rainbow friend", "rizz", "smurf cat", "bro", "mr beast", "noot noot", "cg5", "huggy wuggy", "seek", "scary blue", "zumbl sauce", "fnf", "among us", "dream", "soyjak", "garten of banban", "pizza tower", "monday left me broken cat", "beluga", "roblox", "the ocky way", "whopper", "blud"];
       var verbs_rizz = ["rizz", "sus", "unalive", "hit the griddy", "let him cook"];
       var replacedSentence = document.getElementById("textInput").value.split(" ").map(function (word) {
-        if (isNoun(cleanWord(word)) && Math.floor(Math.random() * 3) === 2 /*&& word.toLowerCase() != "you" && word.toLowerCase() != "you're" && word.toLowerCase() != "your" && word.toLowerCase() != "the" &&
-word.toLowerCase() != "i"*/) {
+        if (isNoun(cleanWord(word)) && Math.floor(Math.random() * 3) === 2 && word.toLowerCase() != "you" && word.toLowerCase() != "you're" && word.toLowerCase() != "your" && word.toLowerCase() != "the" &&
+word.toLowerCase() != "i") {
           return nouns_rizz[Math.floor(Math.random() * nouns_rizz.length)];
-        } else if (isVerb(cleanWord(word)) && Math.floor(Math.random() * 5) === 3 /*&& word.toLowerCase() != "is"*/) {
+        } else if (isVerb(cleanWord(word)) && Math.floor(Math.random() * 5) === 3 && word.toLowerCase() != "is") {
           return verbs_rizz[Math.floor(Math.random() * verbs_rizz.length)];
         } else {
           return word;
