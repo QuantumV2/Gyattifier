@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Wait I'm From Ohio</title>
+</head>
+
+<body>
+  <textarea id="textInput" rows="4" cols="50" class="slider"></textarea>
+  <buttons_list><button onclick="replaceWords()" class="misbutton">Gyattify</button></buttons_list>
+  <p id="output"></p>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://unpkg.com/compromise"></script>
+  <script>
+    function cleanWord(word) {
+      const cleanedWord = word.replace(/[^\w\s]|_/g, "").replace("?", "");
+      return cleanedWord
+    }
+    function isDeterminer(word) {
+      return nlp(word).match('#Determiner').found;
+    }
+    function isPronoun(word) {
+      return nlp(word).match('#Pronoun').found;
+    }
+    function isNoun(word) {
+      const doc = nlp(word);
+      var ignore = false
+      if (isDeterminer(doc) || isPronoun(doc)) {ignore = true;}
+      if (ignore === false) {return doc.nouns().out('array').length != 0 && doc.verbs().out('array').length <= 0;}
+      else {return false;}
+    }
+    function isVerb(word) {
+      const doc = nlp(word);
+      var ignore = false
+      if (isDeterminer(doc) || isPronoun(doc)) {ignore = true;}
+      if (ignore === false) {return doc.verbs().out('array').length != 0 && doc.nouns().out('array').length <= 0;}
+      else {return false;}
+    }
+    function replaceWords() {
+
+
+      var nouns_rizz = ["ohio", "kai cenat", "sigma", "gyatt", "drip", "baby gronk", "fanum tax", "skibidi toilet", "💀", "grimace shake", "ice spice", "canny", "kino", "uncanny", "bluey", "pibby", "jumbo josh", "rainbow friend", "rizz", "smurf cat", "bro", "mr beast", "noot noot", "cg5", "huggy wuggy", "seek", "scary blue", "zumbl sauce", "fnf", "among us", "dream", "soyjak", "garten of banban", "pizza tower", "monday left me broken cat", "beluga", "roblox", "the ocky way", "whopper", "blud"];
+      var verbs_rizz = ["rizz", "sus", "unalive", "hit the griddy", "let him cook"];
+      var replacedSentence = document.getElementById("textInput").value.split(" ").map(function (word) {
+        if (isNoun(cleanWord(word)) && Math.floor(Math.random() * 3) === 2 /*&& word.toLowerCase() != "you" && word.toLowerCase() != "you're" && word.toLowerCase() != "your" && word.toLowerCase() != "the" &&
+word.toLowerCase() != "i"*/) {
+          return nouns_rizz[Math.floor(Math.random() * nouns_rizz.length)];
+        } else if (isVerb(cleanWord(word)) && Math.floor(Math.random() * 5) === 3 /*&& word.toLowerCase() != "is"*/) {
+          return verbs_rizz[Math.floor(Math.random() * verbs_rizz.length)];
+        } else {
+          return word;
+        }
+      }).join(" ");
+      document.getElementById("output").textContent = replacedSentence;
+
+      /*var replacedSentence = document.getElementById("textInput").value.split(" ").map(function (word) {
+      if (nouns.includes(word)) {
+      return nouns_rizz[Math.floor(Math.random() * nouns_rizz.length)];
+      } else if (verbs.includes(word)) {
+      return verbs_rizz[Math.floor(Math.random() * verbs_rizz.length)];
+      }
+      else {
+      return word;
+      }
+      }).join(" ");
+      document.getElementById("output").textContent = replacedSentence;
+      }*/
+    }
+  </script>
+</body>
+
+</html>
