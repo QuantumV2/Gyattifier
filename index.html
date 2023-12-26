@@ -13,8 +13,8 @@
   <script src="https://unpkg.com/compromise"></script>
   <script>
   const urlParams = new URLSearchParams(window.location.search);
-  let random1 = urlParams.get('random1') || 3;
-  let random2 = urlParams.get('random2') || 6;
+  let random1 = parseInt(urlParams.get('random1')) || 3;
+  let random2 = parseInt(urlParams.get('random2')) || 6;
 
     
     function cleanWord(word) {
