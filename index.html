@@ -12,9 +12,8 @@
   <link href="style.css" rel="stylesheet" type="text/css" />
   <script src="https://unpkg.com/compromise"></script>
   <script>
-
-
-    
+    const urlParams = new URLSearchParams(window.location.search);
+    const extreme = urlParams.get('extreme')?.toLowerCase() === "true" || true;
     function cleanWord(word) {
       const cleanedWord = word.replace(/[^\w\s]|_/g, "").replace("?", "");
       return cleanedWord
@@ -42,21 +41,110 @@
     function replaceWords() {
 
 
-      var nouns_rizz = ["ohio", "kai cenat", "sigma", "gyatt", "drip", "baby gronk", "fanum tax", "skibidi toilet", "💀", "grimace shake", "ice spice", "canny", "kino", "uncanny", "bluey", "pibby", "jumbo josh", "rainbow friend", "rizz", "smurf cat", 
-                        "bro", "mr beast", "noot noot", "cg5", "huggy wuggy", "seek", "scary blue", "zumbl sauce", "fnf", "among us", "soyjak", "garten of banban", "pizza tower", "monday left me broken cat", "beluga", "roblox", "the ocky way", "whopper", "blud",
-                        "lario", "bussin", "morbin", "more boolets", "dj khaled", "california girls", "emotional damage", "bing chilling", "glaggle", "coems", "wise mystical", "nathaniel b", "goofy ahh"];
-      var verbs_rizz = ["rizz", "sus", "hit the griddy"];
-      var replacedSentence = document.getElementById("textInput").value.split(" ").map(function (word) {
-        if (isNoun(cleanWord(word)) && Math.floor(Math.random() * 3) === 2 && word.toLowerCase() != "you" && word.toLowerCase() != "you're" && word.toLowerCase() != "your" && word.toLowerCase() != "the" &&
-word.toLowerCase() != "i") {
-          return nouns_rizz[Math.floor(Math.random() * nouns_rizz.length)];
-        } else if (isVerb(cleanWord(word)) && Math.floor(Math.random() * 6) === 3 && word.toLowerCase() != "is" && word.toLowerCase() != "may") {
-          return verbs_rizz[Math.floor(Math.random() * verbs_rizz.length)];
-        } else {
-          return word;
-        }
-      }).join(" ");
-      document.getElementById("output").textContent = replacedSentence;
+      var nouns_rizz = [
+        "ohio",
+        "kai cenat",
+        "sigma",
+        "gyatt",
+        "drip",
+        "baby gronk",
+        "fanum tax",
+        "skibidi toilet",
+        "💀",
+        "grimace shake",
+        "ice spice",
+        "canny",
+        "kino",
+        "uncanny",
+        "bluey",
+        "pibby",
+        "jumbo josh",
+        "rainbow friend",
+        "rizz",
+        "smurf cat",
+        "bro",
+        "mr beast",
+        "noot noot",
+        "cg5",
+        "huggy wuggy",
+        "seek",
+        "scary blue",
+        "zumbl sauce",
+        "fnf",
+        "among us",
+        "soyjak",
+        "garten of banban",
+        "pizza tower",
+        "monday left me broken cat",
+        "beluga",
+        "roblox",
+        "the ocky way",
+        "whopper",
+        "blud",
+        "lario",
+        "bussin",
+        "morbin",
+        "more boolets",
+        "dj khaled",
+        "california girls",
+        "emotional damage",
+        "bing chilling",
+        "glaggle",
+        "coems",
+        "wise mystical",
+        "nathaniel b",
+        "goofy ahh",
+      ];
+      var verbs_rizz = ["rizz", "sus", "hit the griddy"]; // Your array of verbs
+      var words = document.getElementById("textInput").value.split(" ");
+      var replacedWords = [];
+      if (!extreme) {
+        replacedWords = words.map(function (word) {
+          if (
+            isNoun(cleanWord(word)) &&
+            Math.floor(Math.random() * 3) === 2 &&
+            word.toLowerCase() != "you" &&
+            word.toLowerCase() != "you're" &&
+            word.toLowerCase() != "your" &&
+            word.toLowerCase() != "the" &&
+            word.toLowerCase() != "i"
+          ) {
+            return nouns_rizz[Math.floor(Math.random() * nouns_rizz.length)];
+          } else if (
+            isVerb(cleanWord(word)) &&
+            Math.floor(Math.random() * 6) === 3 &&
+            word.toLowerCase() != "is" &&
+            word.toLowerCase() != "may"
+          ) {
+            return verbs_rizz[Math.floor(Math.random() * verbs_rizz.length)];
+          } else {
+            return word;
+          }
+        });
+      }
+      else {
+        replacedWords = words.map(function (word) {
+          if (
+            isNoun(cleanWord(word)) &&
+            word.toLowerCase() != "you" &&
+            word.toLowerCase() != "you're" &&
+            word.toLowerCase() != "your" &&
+            word.toLowerCase() != "the" &&
+            word.toLowerCase() != "i"
+          ) {
+            return nouns_rizz[Math.floor(Math.random() * nouns_rizz.length)];
+          } else if (
+            isVerb(cleanWord(word)) &&
+            word.toLowerCase() != "is" &&
+            word.toLowerCase() != "may"
+          ) {
+            return verbs_rizz[Math.floor(Math.random() * verbs_rizz.length)];
+          } else {
+            return word;
+          }
+        });
+      }
+      document.getElementById("output").textContent = replacedWords.join(" ");
 
     }
   </script>
